@@ -5,12 +5,12 @@ namespace Exam.Discord
 {
     public class Discord : IDiscord
     {
+        private Dictionary<string, Message> messagesById = new Dictionary<string, Message>();
+
         public int Count => throw new NotImplementedException();
 
         public bool Contains(Message message)
-        {
-            throw new NotImplementedException();
-        }
+            => messagesById.ContainsKey(message.Id);
 
         public void DeleteMessage(string messageId)
         {
