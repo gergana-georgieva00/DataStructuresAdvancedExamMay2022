@@ -7,7 +7,7 @@ namespace Exam.Discord
     {
         private Dictionary<string, Message> messagesById = new Dictionary<string, Message>();
 
-        public int Count => throw new NotImplementedException();
+        public int Count => messagesById.Keys.Count;
 
         public bool Contains(Message message)
             => messagesById.ContainsKey(message.Id);
