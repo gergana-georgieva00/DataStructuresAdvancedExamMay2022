@@ -36,7 +36,12 @@ namespace Exam.Discord
 
         public Message GetMessage(string messageId)
         {
-            throw new NotImplementedException();
+            if (!messagesById.ContainsKey(messageId))
+            {
+                throw new ArgumentException();
+            }
+
+            return messagesById[messageId];
         }
 
         public IEnumerable<Message> GetMessageInTimeRange(int lowerBound, int upperBound)
