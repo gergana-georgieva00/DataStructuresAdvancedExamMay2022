@@ -61,7 +61,12 @@ namespace Exam.Discord
 
         public void ReactToMessage(string messageId, string reaction)
         {
-            throw new NotImplementedException();
+            if (!messagesById.ContainsKey(messageId))
+            {
+                throw new ArgumentException();
+            }
+
+            messagesById[messageId].Reactions.Add(reaction);
         }
 
         public void SendMessage(Message message)
