@@ -71,7 +71,8 @@ namespace Exam.Discord
 
         public void SendMessage(Message message)
         {
-            
+            messagesById.Add(message.Id, message);
+            messagesByChannel.Add(message.Channel, message);
         }
     }
 }
