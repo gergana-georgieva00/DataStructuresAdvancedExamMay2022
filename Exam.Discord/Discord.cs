@@ -31,7 +31,7 @@ namespace Exam.Discord
                                   .ThenBy(m => m.Content.Length);
 
         public IEnumerable<Message> GetChannelMessages(string channel)
-            => (IEnumerable<Message>)messagesByChannel[channel]
+            => (IEnumerable<Message>)messagesByChannel[channel];
 
         public Message GetMessage(string messageId)
         {
@@ -44,9 +44,9 @@ namespace Exam.Discord
         }
 
         public IEnumerable<Message> GetMessageInTimeRange(int lowerBound, int upperBound)
-        {
-            throw new NotImplementedException();
-        }
+            => messagesById.Values
+            .Where(m => m.Timestamp >= lowerBound && m.Timestamp <= upperBound)
+            .OrderByDescending(m => messagesByChannel.Values.Count);
 
         public IEnumerable<Message> GetMessagesByReactions(List<string> reactions)
         {
