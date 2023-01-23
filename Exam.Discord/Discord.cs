@@ -31,9 +31,7 @@ namespace Exam.Discord
                                   .ThenBy(m => m.Content.Length);
 
         public IEnumerable<Message> GetChannelMessages(string channel)
-        {
-            throw new NotImplementedException();
-        }
+            => (IEnumerable<Message>)messagesByChannel[channel]
 
         public Message GetMessage(string messageId)
         {
