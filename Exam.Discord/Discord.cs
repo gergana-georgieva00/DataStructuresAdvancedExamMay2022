@@ -14,6 +14,11 @@ namespace Exam.Discord
 
         public void DeleteMessage(string messageId)
         {
+            if (!messagesById.ContainsKey(messageId))
+            {
+                throw new ArgumentException();
+            }
+
             messagesById.Remove(messageId);
         }
 
