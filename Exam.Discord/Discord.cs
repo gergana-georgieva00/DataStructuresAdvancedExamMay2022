@@ -21,8 +21,9 @@ namespace Exam.Discord
                 throw new ArgumentException();
             }
 
+            var message = messagesById[messageId];
             messagesById.Remove(messageId);
-            messagesByChannel.Remove(messagesById[messageId].Channel);
+            messagesByChannel[message.Channel].Remove(message);
         }
 
         public IEnumerable<Message> GetAllMessagesOrderedByCountOfReactionsThenByTimestampThenByLengthOfContent()
@@ -72,7 +73,7 @@ namespace Exam.Discord
         public void SendMessage(Message message)
         {
             messagesById.Add(message.Id, message);
-            messagesByChannel.Add(message.Channel, message);
+            messagesByChannel[message.Channel].Add(message);
         }
     }
 }
