@@ -14,7 +14,7 @@ namespace Exam.Discord
 
         public void DeleteMessage(string messageId)
         {
-            throw new NotImplementedException();
+            messagesById.Remove(messageId);
         }
 
         public IEnumerable<Message> GetAllMessagesOrderedByCountOfReactionsThenByTimestampThenByLengthOfContent()
