@@ -49,9 +49,10 @@ namespace Exam.Discord
             .OrderByDescending(m => messagesByChannel.Values.Count);
 
         public IEnumerable<Message> GetMessagesByReactions(List<string> reactions)
-        {
-            throw new NotImplementedException();
-        }
+            => messagesById.Values
+            .Where(m => reactions
+            .All(r => m.Reactions
+            .Any(re => re.Equals(r, StringComparison.OrdinalIgnoreCase))));
 
         public IEnumerable<Message> GetTop3MostReactedMessages()
         {
