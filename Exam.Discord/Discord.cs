@@ -55,9 +55,9 @@ namespace Exam.Discord
             .Any(re => re.Equals(r, StringComparison.OrdinalIgnoreCase))));
 
         public IEnumerable<Message> GetTop3MostReactedMessages()
-        {
-            throw new NotImplementedException();
-        }
+            => messagesById.Values
+            .OrderByDescending(m => m.Reactions.Count)
+            .Take(3);
 
         public void ReactToMessage(string messageId, string reaction)
         {
