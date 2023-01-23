@@ -6,6 +6,7 @@ namespace Exam.Discord
     public class Discord : IDiscord
     {
         private Dictionary<string, Message> messagesById = new Dictionary<string, Message>();
+        private Dictionary<string, Message> messagesByChannel = new Dictionary<string, Message>();
 
         public int Count => messagesById.Keys.Count;
 
@@ -20,6 +21,7 @@ namespace Exam.Discord
             }
 
             messagesById.Remove(messageId);
+            messagesByChannel.Remove(messagesById[messageId].Channel);
         }
 
         public IEnumerable<Message> GetAllMessagesOrderedByCountOfReactionsThenByTimestampThenByLengthOfContent()
@@ -59,7 +61,7 @@ namespace Exam.Discord
 
         public void SendMessage(Message message)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
