@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Exam.Discord
 {
@@ -25,9 +26,9 @@ namespace Exam.Discord
         }
 
         public IEnumerable<Message> GetAllMessagesOrderedByCountOfReactionsThenByTimestampThenByLengthOfContent()
-        {
-            throw new NotImplementedException();
-        }
+            => messagesById.Values.OrderByDescending(m => m.Reactions)
+                                  .ThenBy(m => m.Timestamp)
+                                  .ThenBy(m => m.Content.Length);
 
         public IEnumerable<Message> GetChannelMessages(string channel)
         {
