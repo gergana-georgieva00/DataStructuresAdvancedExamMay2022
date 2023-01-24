@@ -7,7 +7,7 @@ namespace Exam.Discord
     public class Discord : IDiscord
     {
         private Dictionary<string, Message> messagesById = new Dictionary<string, Message>();
-        private Dictionary<string, List<Message>> messagesByChannel = new Dictionary<string, List<Message>>();
+        //private Dictionary<string, List<Message>> messagesByChannel = new Dictionary<string, List<Message>>();
 
         public int Count => messagesById.Keys.Count;
 
@@ -23,7 +23,7 @@ namespace Exam.Discord
 
             var message = messagesById[messageId];
             messagesById.Remove(messageId);
-            messagesByChannel[message.Channel].Remove(message);
+            //messagesByChannel[message.Channel].Remove(message);
         }
 
         public IEnumerable<Message> GetAllMessagesOrderedByCountOfReactionsThenByTimestampThenByLengthOfContent()
@@ -32,7 +32,14 @@ namespace Exam.Discord
                                   .ThenBy(m => m.Content.Length);
 
         public IEnumerable<Message> GetChannelMessages(string channel)
-            => messagesByChannel[channel];
+        {
+            //if (messagesByChannel[channel].Count == 0)
+            //{
+            //    throw new ArgumentException();
+            //}
+
+            //return messagesByChannel[channel];
+        }
 
         public Message GetMessage(string messageId)
         {
