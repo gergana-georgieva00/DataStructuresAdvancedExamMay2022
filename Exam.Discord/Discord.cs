@@ -7,7 +7,7 @@ namespace Exam.Discord
     public class Discord : IDiscord
     {
         private Dictionary<string, Message> messagesById = new Dictionary<string, Message>();
-        //private Dictionary<string, List<Message>> messagesByChannel = new Dictionary<string, List<Message>>();
+        private Dictionary<string, List<Message>> messagesByChannel = new Dictionary<string, List<Message>>();
 
         public int Count => messagesById.Keys.Count;
 
