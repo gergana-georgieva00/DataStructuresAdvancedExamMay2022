@@ -5,13 +5,14 @@ namespace Exam.MoovIt
 {
     public class MoovIt : IMoovIt
     {
-        private Dictionary<string, Route> routesById = new Dictionary<string, Route>();
+        //private Dictionary<string, Route> routesById = new Dictionary<string, Route>();
+        private HashSet<Route> routes = new HashSet<Route>();
 
-        public int Count => throw new NotImplementedException();
+        public int Count => routes.Count;
 
         public void AddRoute(Route route)
         {
-            throw new NotImplementedException();
+            routes.Add(route);
         }
 
         public void ChooseRoute(string routeId)
