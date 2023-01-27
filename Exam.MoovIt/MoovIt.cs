@@ -12,6 +12,11 @@ namespace Exam.MoovIt
 
         public void AddRoute(Route route)
         {
+            if (this.routes.Contains(route))
+            {
+                throw new ArgumentException();
+            }
+
             routes.Add(route);
         }
 
@@ -21,9 +26,7 @@ namespace Exam.MoovIt
         }
 
         public bool Contains(Route route)
-        {
-            throw new NotImplementedException();
-        }
+            => routes.Contains(route);
 
         public IEnumerable<Route> GetFavoriteRoutes(string destinationPoint)
         {
