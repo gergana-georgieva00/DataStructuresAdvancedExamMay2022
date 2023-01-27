@@ -23,7 +23,7 @@ namespace Exam.Discord
 
             var message = messagesById[messageId];
             messagesById.Remove(messageId);
-            messagesByChannel.Remove(message.Channel);
+            messagesByChannel[message.Channel].Remove(message);
         }
 
         public IEnumerable<Message> GetAllMessagesOrderedByCountOfReactionsThenByTimestampThenByLengthOfContent()
@@ -33,12 +33,14 @@ namespace Exam.Discord
 
         public IEnumerable<Message> GetChannelMessages(string channel)
         {
-            if (messagesByChannel[channel].Count == 0)
+            var channelMessages = messagesById.Values.Where(m => m.Channel == channel).ToList();
+
+            if (channelMessages.Count == 0)
             {
                 throw new ArgumentException();
             }
 
-            return messagesByChannel[channel];
+            return channelMessages;
         }
 
         public Message GetMessage(string messageId)
@@ -58,8 +60,7 @@ namespace Exam.Discord
 
         public IEnumerable<Message> GetMessagesByReactions(List<string> reactions)
             => messagesById.Values
-            .Where(m => reactions
-            .Any(r => reactions.Contains(r)))
+            .Where(m => reactions.All(r => m.Reactions.Contains(r)))
             .OrderByDescending(m => m.Reactions.Count)
             .ThenBy(m => m.Timestamp);
 
@@ -80,15 +81,13 @@ namespace Exam.Discord
 
         public void SendMessage(Message message)
         {
-            if (!messagesById.ContainsKey(message.Id))
+            if (!messagesByChannel.ContainsKey(message.Channel))
             {
-                messagesById.Add(message.Id, message);
                 messagesByChannel.Add(message.Channel, new List<Message>());
             }
-            else
-            {
-                messagesByChannel[message.Channel].Add(message);
-            }
+            
+            messagesByChannel[message.Channel].Add(message);
+            messagesById.Add(message.Id, message);
         }
     }
 }
