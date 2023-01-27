@@ -9,7 +9,7 @@ namespace Exam.Discord
         private Dictionary<string, Message> messagesById = new Dictionary<string, Message>();
         private Dictionary<string, List<Message>> messagesByChannel = new Dictionary<string, List<Message>>();
 
-        public int Count => messagesById.Keys.Count;
+        public int Count => messagesById.Count;
 
         public bool Contains(Message message)
             => messagesById.ContainsKey(message.Id);
