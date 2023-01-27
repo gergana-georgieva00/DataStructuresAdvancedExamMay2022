@@ -43,7 +43,14 @@ namespace Exam.MoovIt
 
         public Route GetRoute(string routeId)
         {
-            throw new NotImplementedException();
+            var route = routes.Where(r => r.Id == routeId).FirstOrDefault();
+
+            if (route is null)
+            {
+                throw new ArgumentException();
+            }
+
+            return route;
         }
 
         public IEnumerable<Route> GetTop5RoutesByPopularityThenByDistanceThenByCountOfLocationPoints()
