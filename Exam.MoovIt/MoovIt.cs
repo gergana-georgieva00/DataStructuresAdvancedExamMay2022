@@ -60,7 +60,14 @@ namespace Exam.MoovIt
 
         public void RemoveRoute(string routeId)
         {
-            throw new NotImplementedException();
+            var route = routes.Where(r => r.Id == routeId).FirstOrDefault();
+
+            if (route is null)
+            {
+                throw new ArgumentException();
+            }
+
+            routes.Remove(route);
         }
 
         public IEnumerable<Route> SearchRoutes(string startPoint, string endPoint)
