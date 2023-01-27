@@ -54,9 +54,10 @@ namespace Exam.MoovIt
         }
 
         public IEnumerable<Route> GetTop5RoutesByPopularityThenByDistanceThenByCountOfLocationPoints()
-        {
-            throw new NotImplementedException();
-        }
+            => routes.OrderByDescending(r => r.Popularity)
+               .ThenBy(r => r.Distance)
+               .ThenBy(r => r.LocationPoints.Count)
+               .Take(5);
 
         public void RemoveRoute(string routeId)
         {
