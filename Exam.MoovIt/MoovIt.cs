@@ -72,8 +72,11 @@ namespace Exam.MoovIt
         }
 
         public IEnumerable<Route> SearchRoutes(string startPoint, string endPoint)
-        {
-            throw new NotImplementedException();
-        }
+            => routes.Where(r => r.LocationPoints.Contains(startPoint)
+                              && r.LocationPoints.Contains(endPoint)
+                              && r.LocationPoints.IndexOf(startPoint) < r.LocationPoints.IndexOf(endPoint))
+            .OrderBy(r => r.IsFavorite)
+            .ThenBy(r => r.LocationPoints.IndexOf(endPoint) - r.LocationPoints.IndexOf(startPoint))
+            .ThenByDescending(r => r.Popularity);
     }
 }
