@@ -6,7 +6,7 @@ namespace Exam.MoovIt
 {
     public class MoovIt : IMoovIt
     {
-        //private Dictionary<string, Route> routesById = new Dictionary<string, Route>();
+        private Dictionary<string, Route> routesById = new Dictionary<string, Route>();
         private HashSet<Route> routes = new HashSet<Route>();
 
         public int Count => routes.Count;
@@ -19,18 +19,17 @@ namespace Exam.MoovIt
             }
 
             routes.Add(route);
+            routesById.Add(route.Id, route);
         }
 
         public void ChooseRoute(string routeId)
         {
-            var route = routes.Where(r => r.Id == routeId).FirstOrDefault();
-
-            if (route is null)
+            if (!routesById.ContainsKey(routeId))
             {
                 throw new ArgumentException();
             }
 
-            route.Popularity++;
+            routesById[routeId].Popularity++;
         }
 
         public bool Contains(Route route)
