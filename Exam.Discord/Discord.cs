@@ -79,8 +79,15 @@ namespace Exam.Discord
 
         public void SendMessage(Message message)
         {
-            messagesById.Add(message.Id, message);
-            messagesByChannel[message.Channel].Add(message);
+            if (!messagesById.ContainsKey(message.Id))
+            {
+                messagesById.Add(message.Id, message);
+                messagesByChannel.Add(message.Channel, new List<Message>());
+            }
+            else
+            {
+                messagesByChannel[message.Channel].Add(message);
+            }
         }
     }
 }
