@@ -32,5 +32,12 @@ namespace Exam.MoovIt
                    && this.LocationPoints[this.LocationPoints.Count - 1] ==
                       other.LocationPoints[other.LocationPoints.Count - 1];
         }
+
+        public override int GetHashCode()
+        {
+            return this.Distance.GetHashCode()
+                   * this.LocationPoints[0].GetHashCode()
+                   * this.LocationPoints[this.LocationPoints.Count - 1].GetHashCode();
+        }
     }
 }
