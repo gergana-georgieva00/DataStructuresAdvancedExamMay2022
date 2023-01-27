@@ -59,8 +59,9 @@ namespace Exam.Discord
         public IEnumerable<Message> GetMessagesByReactions(List<string> reactions)
             => messagesById.Values
             .Where(m => reactions
-            .All(r => m.Reactions
-            .Any(re => re.Equals(r, StringComparison.OrdinalIgnoreCase))));
+            .Any(r => reactions.Contains(r)))
+            .OrderByDescending(m => m.Reactions.Count)
+            .ThenBy(m => m.Timestamp);
 
         public IEnumerable<Message> GetTop3MostReactedMessages()
             => messagesById.Values
