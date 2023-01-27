@@ -54,7 +54,7 @@ namespace Exam.Discord
         public IEnumerable<Message> GetMessageInTimeRange(int lowerBound, int upperBound)
             => messagesById.Values
             .Where(m => m.Timestamp >= lowerBound && m.Timestamp <= upperBound)
-            .OrderByDescending(m => messagesByChannel.Values.Count);
+            .OrderByDescending(m => messagesByChannel[m.Channel].Count);
 
         public IEnumerable<Message> GetMessagesByReactions(List<string> reactions)
             => messagesById.Values
