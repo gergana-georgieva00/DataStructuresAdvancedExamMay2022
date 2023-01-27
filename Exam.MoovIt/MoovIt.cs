@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Exam.MoovIt
 {
@@ -22,7 +23,14 @@ namespace Exam.MoovIt
 
         public void ChooseRoute(string routeId)
         {
-            throw new NotImplementedException();
+            var route = routes.Where(r => r.Id == routeId).FirstOrDefault();
+
+            if (route is null)
+            {
+                throw new ArgumentException();
+            }
+
+            route.Popularity++;
         }
 
         public bool Contains(Route route)
