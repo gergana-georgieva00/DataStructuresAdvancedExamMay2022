@@ -42,14 +42,12 @@ namespace Exam.MoovIt
 
         public Route GetRoute(string routeId)
         {
-            var route = routes.Where(r => r.Id == routeId).FirstOrDefault();
-
-            if (route is null)
+            if (!routesById.ContainsKey(routeId))
             {
                 throw new ArgumentException();
             }
 
-            return route;
+            return routesById[routeId];
         }
 
         public IEnumerable<Route> GetTop5RoutesByPopularityThenByDistanceThenByCountOfLocationPoints()
@@ -60,14 +58,15 @@ namespace Exam.MoovIt
 
         public void RemoveRoute(string routeId)
         {
-            var route = routes.Where(r => r.Id == routeId).FirstOrDefault();
-
-            if (route is null)
+            if (!routesById.ContainsKey(routeId))
             {
                 throw new ArgumentException();
             }
 
+            var route = routesById[routeId];
+
             routes.Remove(route);
+            routesById.Remove(routeId);
         }
 
         public IEnumerable<Route> SearchRoutes(string startPoint, string endPoint)
