@@ -23,7 +23,7 @@ namespace Exam.Discord
 
             var message = messagesById[messageId];
             messagesById.Remove(messageId);
-            messagesByChannel[message.Channel].Remove(message);
+            messagesByChannel.Remove(message.Channel);
         }
 
         public IEnumerable<Message> GetAllMessagesOrderedByCountOfReactionsThenByTimestampThenByLengthOfContent()
