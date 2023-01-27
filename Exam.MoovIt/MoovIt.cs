@@ -5,6 +5,8 @@ namespace Exam.MoovIt
 {
     public class MoovIt : IMoovIt
     {
+        private Dictionary<string, Route> routesById = new Dictionary<string, Route>();
+
         public int Count => throw new NotImplementedException();
 
         public void AddRoute(Route route)

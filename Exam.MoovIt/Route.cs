@@ -22,5 +22,15 @@ namespace Exam.MoovIt
             this.IsFavorite = isFavorite;
             this.LocationPoints = locationPoints;
         }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Route;
+
+            return this.Distance == other.Distance
+                   && this.LocationPoints[0] == other.LocationPoints[0]
+                   && this.LocationPoints[this.LocationPoints.Count - 1] ==
+                      other.LocationPoints[other.LocationPoints.Count - 1];
+        }
     }
 }
