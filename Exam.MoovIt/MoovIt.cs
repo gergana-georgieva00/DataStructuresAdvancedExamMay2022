@@ -37,9 +37,9 @@ namespace Exam.MoovIt
             => routes.Contains(route);
 
         public IEnumerable<Route> GetFavoriteRoutes(string destinationPoint)
-        {
-            throw new NotImplementedException();
-        }
+            => routes.Where(r => r.IsFavorite && r.LocationPoints.IndexOf(destinationPoint) > 0)
+                .OrderBy(r => r.Distance)
+                .ThenByDescending(r => r.Popularity);
 
         public Route GetRoute(string routeId)
         {
